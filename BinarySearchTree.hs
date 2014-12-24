@@ -74,8 +74,8 @@ postOrder Leaf = []
 postOrder (Node v l r) = postOrder l ++ postOrder r ++ [v]
 
 
-bst Leaf = []
-bst tree @ (Node v l r) = go l [v] [r]
+levelOrder Leaf = []
+levelOrder tree @ (Node v l r) = go l [v] [r]
   where go _ result [] = reverse result
         go Leaf vs (q:qs) = go q vs qs
         go (Node v l r) vs (q:qs) = go q (v:vs) (qs ++ [l, r])
@@ -97,5 +97,5 @@ main = do
   print $ preOrder tree'
   print $ inOrder tree'
   print $ postOrder tree'
-  print $ bst tree'
+  print $ levelOrder tree'
 

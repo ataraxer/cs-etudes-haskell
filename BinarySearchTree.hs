@@ -84,7 +84,7 @@ levelOrder tree @ (Node v l r) = go l [v] [r]
 instance (Show a) => Show (Tree a) where
   show Leaf = "#"
   show tree @ (Node v l r) =
-    show v ++ " " ++  "(" ++ (show l) ++ " " ++ (show r) ++ ")"
+    "(" ++  show v ++ " -> " ++ (show l) ++ " " ++ (show r) ++ ")"
 
 
 main = do

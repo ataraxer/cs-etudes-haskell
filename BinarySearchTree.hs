@@ -19,6 +19,18 @@ exists value tree = found /= Nothing
   where found = find value tree
 
 
+{-paths :: Tree a -> [[a]]-}
+paths tree = go [] tree
+  where go xs Leaf = []
+        go xs (Node v Leaf Leaf) = [v:xs]
+        go xs (Node v l r) = (next l) ++ (next r)
+          where next = go (v:xs)
+
+
+isBalanced tree = (maximum p) - (minimum p) <= 1
+  where p = map length $ paths tree
+
+
 {-insert :: a -> Tree a -> Tree a-}
 insert value Leaf = Node value Leaf Leaf
 insert value tree @ (Node v l r)
@@ -91,6 +103,8 @@ main = do
   let nodes = reverse [100, 50, 25, 35, 75, 60, 65, 150]
   let tree = insertAll nodes Leaf
   print tree
+  print $ paths tree
+  print $ isBalanced tree
   print $ remove 50 tree
   let nodes' = reverse ['F', 'B', 'A', 'D', 'C', 'E', 'G', 'I', 'H']
   let tree' = insertAll nodes' Leaf
